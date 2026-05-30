@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── DESIGN TOKENS ──────────────────────────────────────────────────────────── */
+:root {
+  --bg:             #F2F7F4;
+  --bg-warm:        #E9EFEA;
+  --surface:        #FFFFFF;
+  --surface2:       #F9FCFA;
+  --surface3:       #EEF4F0;
+  --border:         #CDE0D4;
+  --border-light:   #E2ECE6;
+
+  /* Green palette */
+  --accent:         #15803D; /* Green-700 */
+  --accent-light:   #22C55E; /* Green-500 */
+  --accent-dark:    #14532D; /* Green-900 */
+  --accent-muted:   rgba(21, 128, 61, 0.12);
+  --accent-border:  rgba(21, 128, 61, 0.25);
+  --accent-glow:    rgba(21, 128, 61, 0.45);
+
+  /* Text - Warm Charcoal */
+  --charcoal:       #1D2A22;
+  --charcoal-soft:  #2D4034;
+  --text-primary:   #1D2A22;
+  --text-secondary: #4A6354;
+  --text-tertiary:  #759582;
+  --text-inverse:   #FFFFFF;
+  --gold:           #15803D; /* Kept name for compatibility, but it's green */
+
+  /* Surfaces */
+  --black:          #111A15;
+  --card-bg:        #FFFFFF;
+  --modal-bg:       #F2F7F4;
+
+  /* Premium gradients */
+  --grad-gold:      linear-gradient(135deg, #14532D 0%, #22C55E 50%, #15803D 100%);
+  --grad-dark:      linear-gradient(135deg, #1D2A22 0%, #2D4034 100%);
+  --grad-premium:   linear-gradient(135deg, #FFFFFF 0%, #F2F7F4 100%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(61, 82, 255, 0.22);
+  color: var(--text-primary);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Noise texture utility */
+.noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Dot grid pattern */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(61, 82, 255, 0.14) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Word reveal container */
+.word-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+/* Magnetic wrapper */
+.magnetic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Accent gradient text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Scroll progress bar */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+  transform-origin: left;
+  z-index: 9999;
+}
+
+/* Hide scrollbar on mobile overlay */
+.no-scroll {
+  overflow: hidden;
+}

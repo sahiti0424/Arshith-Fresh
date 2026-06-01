@@ -47,26 +47,26 @@ export default function Contact() {
           >
             Get in <span style={{ color: 'var(--gold)', fontStyle: 'italic' }}>Touch</span>
           </motion.h1>
-          
+
           <motion.div variants={fadeUp} style={{ width: 60, height: 2, background: 'var(--gold)', margin: '0 auto 60px' }} />
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: 60 }}>
-          <motion.div 
-            variants={fadeUp} 
-            style={{ 
-              background: 'var(--surface)', 
-              padding: 56, 
-              borderRadius: 20, 
+          <motion.div
+            variants={fadeUp}
+            style={{
+              background: 'var(--surface)',
+              padding: 56,
+              borderRadius: 20,
               border: '1px solid var(--border)',
               boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
             }}
           >
             <h2 style={{ fontFamily: "'Inter', sans-serif", fontSize: 32, fontWeight: 700, marginBottom: 24, color: 'var(--text-primary)' }}>Corporate Headquarters</h2>
             <address style={{ fontFamily: "'Roboto', sans-serif", fontStyle: 'normal', color: 'var(--text-secondary)', fontSize: 16, lineHeight: 1.8 }}>
-              Arshith Tower, Plot C-32, G Block<br/>
-              Bandra Kurla Complex<br/>
-              Bandra (East), Mumbai - 400051<br/>
+              Arshith Tower, Plot C-32, G Block<br />
+              Bandra Kurla Complex<br />
+              Bandra (East), Mumbai - 400051<br />
               Maharashtra, India
             </address>
             <div style={{ marginTop: 40, borderTop: '1px solid var(--border)', paddingTop: 32, display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -94,8 +94,8 @@ export default function Contact() {
               <label style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '1.5px', paddingLeft: 4 }}>Message</label>
               <textarea placeholder="How can we help you?" rows="5" style={{ width: '100%', padding: '18px 24px', borderRadius: 12, border: '1px solid var(--border-light)', background: 'var(--surface)', fontFamily: "'Roboto', sans-serif", fontSize: 16, outline: 'none', resize: 'vertical' }}></textarea>
             </div>
-            <motion.button 
-              type="button" 
+            <motion.button
+              type="button"
               whileHover={{ scale: 1.02, backgroundColor: '#c26b05' }}
               whileTap={{ scale: 0.98 }}
               style={{

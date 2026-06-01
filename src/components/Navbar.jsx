@@ -18,8 +18,8 @@ import { useMagnetic } from '../hooks/useMouseTracking'
 
 /* ─── NAV DATA ──────────────────────────────────────────────────────────────── */
 const NAV_ITEMS = [
-  { label: 'Home',       path: '/',           dropdown: null },
-  { label: 'About',      path: '/about',      dropdown: null },
+  { label: 'Home', path: '/', dropdown: null },
+  { label: 'About', path: '/about', dropdown: null },
   { label: 'Businesses', path: '/businesses', dropdown: null },
   {
     label: 'Careers',
@@ -39,9 +39,9 @@ const NAV_ITEMS = [
           icon: Building2,
           color: '#F97316',
           items: [
-            { label: 'Highway Engineering',      desc: 'Expressways & road networks' },
-            { label: 'Smart City Development',   desc: 'Urban infrastructure projects' },
-            { label: 'Commercial Construction',  desc: 'Skyscrapers & complexes' },
+            { label: 'Highway Engineering', desc: 'Expressways & road networks' },
+            { label: 'Smart City Development', desc: 'Urban infrastructure projects' },
+            { label: 'Commercial Construction', desc: 'Skyscrapers & complexes' },
           ],
         },
         {
@@ -49,9 +49,9 @@ const NAV_ITEMS = [
           icon: Cpu,
           color: 'var(--accent)',
           items: [
-            { label: 'Enterprise AI',            desc: 'AI-driven analytics platforms' },
-            { label: 'Cloud Transformation',     desc: 'Hybrid cloud infrastructure' },
-            { label: 'IoT & Smart Systems',      desc: 'Connected city solutions' },
+            { label: 'Enterprise AI', desc: 'AI-driven analytics platforms' },
+            { label: 'Cloud Transformation', desc: 'Hybrid cloud infrastructure' },
+            { label: 'IoT & Smart Systems', desc: 'Connected city solutions' },
           ],
         },
         {
@@ -59,16 +59,16 @@ const NAV_ITEMS = [
           icon: Truck,
           color: '#8B5CF6',
           items: [
-            { label: 'Global Freight',           desc: 'End-to-end freight forwarding' },
-            { label: 'Warehousing',              desc: 'Automated storage systems' },
-            { label: 'Last-Mile Delivery',       desc: 'Electric fleet solutions' },
+            { label: 'Global Freight', desc: 'End-to-end freight forwarding' },
+            { label: 'Warehousing', desc: 'Automated storage systems' },
+            { label: 'Last-Mile Delivery', desc: 'Electric fleet solutions' },
           ],
         },
       ],
     },
   },
   { label: 'Leadership', path: '/leadership', dropdown: null },
-  { label: 'Contact',    path: '/contact',    dropdown: null },
+  { label: 'Contact', path: '/contact', dropdown: null },
 ]
 
 /* ─── DROPDOWN PANEL ─────────────────────────────────────────────────────────── */
@@ -136,7 +136,7 @@ function DropdownPanel({ data }) {
 
 function DropdownItem({ item, accentColor }) {
   const [hovered, setHovered] = useState(false)
-  
+
   const content = (
     <motion.div
       onMouseEnter={() => setHovered(true)}
@@ -363,14 +363,14 @@ export default function Navbar() {
         <div style={{ width: 1, height: 28, background: 'var(--border)', flexShrink: 0, marginRight: 36 }} className="hidden lg:block" />
 
         {/* ── Desktop Nav Items ── */}
-        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 32 }} className="hidden lg:flex">
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 32 }} className="nav-desktop-items hidden lg:flex">
           {NAV_ITEMS.map((item) => (
             <NavItem key={item.label} item={item} />
           ))}
         </div>
 
         {/* ── CTA ── */}
-        <div className="hidden lg:block" style={{ flex: '0 0 auto' }}>
+        <div className="nav-cta-desktop hidden lg:block" style={{ flex: '0 0 auto' }}>
           <MagneticButton>
             <Link to="/contact" style={{ textDecoration: 'none' }}>
               <motion.button
@@ -398,9 +398,9 @@ export default function Navbar() {
 
         {/* ── Mobile Hamburger ── */}
         <motion.button
-          className="lg:hidden ml-auto"
+          className="nav-mobile-button lg:hidden ml-auto"
           onClick={() => setMenuOpen(true)}
-          style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-primary)' }}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-primary)', display: 'none' }}
           whileTap={{ scale: 0.9 }}
         >
           <Menu size={22} strokeWidth={1.5} />
@@ -475,6 +475,26 @@ export default function Navbar() {
                         <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 22, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 8 }}>
                           {item.label}
                         </div>
+                        {item.simpleLinks && (
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: 2, paddingLeft: 12, marginBottom: 8 }}>
+                            {item.simpleLinks.map((link) => (
+                              <Link
+                                key={link.path}
+                                to={link.path}
+                                onClick={() => setMenuOpen(false)}
+                                style={{
+                                  fontFamily: "'Roboto', sans-serif",
+                                  fontSize: 14,
+                                  color: 'var(--text-secondary)',
+                                  padding: '6px 0',
+                                  textDecoration: 'none',
+                                }}
+                              >
+                                — {link.label}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
                         {item.dropdown && (
                           <div style={{ display: 'flex', flexDirection: 'column', gap: 2, paddingLeft: 12 }}>
                             {item.dropdown.cols.flatMap((col) =>

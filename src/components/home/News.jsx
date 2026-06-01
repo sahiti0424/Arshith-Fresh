@@ -41,14 +41,14 @@ const NEWS = [
 
 function NewsCard({ item, index }) {
   const [hovered, setHovered] = useState(false)
-    return (
+  return (
     <motion.article
       variants={fadeUp}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       animate={hovered
         ? { y: -8, boxShadow: '0 32px 64px rgba(212,175,55,0.15)' }
-        : { y: 0,  boxShadow: '0 8px 24px rgba(0,0,0,0.04)' }}
+        : { y: 0, boxShadow: '0 8px 24px rgba(0,0,0,0.04)' }}
       whileTap={{ scale: 0.98, y: -2 }}
       transition={{ type: 'spring', stiffness: 400, damping: 22 }}
       style={{
@@ -154,10 +154,10 @@ function NewsCard({ item, index }) {
 
 export default function News() {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true, rootMargin: '0px 0px -60px 0px' })
-    const [viewAllHovered, setViewAllHovered] = useState(false)
+  const [viewAllHovered, setViewAllHovered] = useState(false)
 
   return (
-    <section style={{ background: 'var(--bg)', padding: '60px 60px 120px' }}>
+    <section style={{ background: 'var(--bg)', padding: '60px 24px 120px' }}>
       <div style={{ maxWidth: 1300, margin: '0 auto' }}>
 
         {/* Header row */}
@@ -168,8 +168,10 @@ export default function News() {
           animate={inView ? 'visible' : 'hidden'}
           style={{
             display: 'flex',
+            flexWrap: 'wrap',
             justifyContent: 'space-between',
             alignItems: 'flex-end',
+            gap: 24,
             marginBottom: 56,
           }}
         >
@@ -241,7 +243,7 @@ export default function News() {
           viewport={{ once: true, margin: '0px 0px -60px 0px' }}
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
             gap: 24,
           }}
         >

@@ -18,14 +18,14 @@ export default function Timeline() {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true, rootMargin: '0px 0px -50px 0px' })
 
   return (
-    <section ref={containerRef} style={{ background: 'var(--surface2)', padding: '120px 60px', position: 'relative', overflow: 'hidden' }}>
-      
+    <section ref={containerRef} style={{ background: 'var(--surface2)', padding: '120px 24px', position: 'relative', overflow: 'hidden' }}>
+
       {/* Background elements */}
       <div className="grain" style={{ position: 'absolute', inset: 0, opacity: 0.5 }} />
       <motion.div style={{ y }} className="absolute right-0 top-1/4 w-[600px] h-[600px] bg-[var(--accent-muted)] rounded-full blur-[100px] pointer-events-none" />
 
       <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
-        
+
         <motion.div
           ref={ref}
           variants={staggerSlow}
@@ -65,15 +65,15 @@ export default function Timeline() {
               style={{ display: 'flex', gap: 40, marginBottom: i === MILESTONES.length - 1 ? 0 : 60, position: 'relative' }}
               className="premium-card"
             >
-              <div style={{ 
-                width: 80, display: 'flex', justifyContent: 'center', position: 'relative', zIndex: 2 
+              <div style={{
+                width: 80, display: 'flex', justifyContent: 'center', position: 'relative', zIndex: 2
               }}>
-                <div style={{ 
+                <div style={{
                   width: 20, height: 20, borderRadius: '50%', background: 'var(--accent)', border: '4px solid var(--surface2)',
                   boxShadow: '0 0 20px var(--accent-glow)', marginTop: 6
                 }} />
               </div>
-              
+
               <div style={{ flex: 1, background: 'var(--surface)', padding: '32px', borderRadius: 16, border: '1px solid var(--border)' }} className="glass-card">
                 <span style={{ fontFamily: "'Syne', sans-serif", fontSize: 32, fontWeight: 800, color: 'var(--accent)', display: 'block', marginBottom: 8 }}>
                   {item.year}

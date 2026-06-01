@@ -142,3 +142,87 @@ body {
 .no-scroll {
   overflow: hidden;
 }
+
+/* Explicit mobile navbar support */
+.nav-mobile-button {
+  display: none;
+}
+.nav-desktop-items,
+.nav-cta-desktop {
+  display: flex;
+}
+
+@media (max-width: 1024px) {
+  .nav-mobile-button {
+    display: inline-flex !important;
+  }
+
+  .nav-desktop-items,
+  .nav-cta-desktop {
+    display: none !important;
+  }
+}
+
+/* Mobile internship cards adjustments */
+.internship-cards-grid {
+  gap: 20px !important;
+}
+
+@media (max-width: 768px) {
+  .internship-cards-grid {
+    gridTemplateColumns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* Reduce card padding on mobile */
+  .internship-cards-grid > div > div {
+    padding: 24px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .internship-cards-grid {
+    gap: 16px !important;
+  }
+
+  .internship-cards-grid > div > div {
+    padding: 20px !important;
+  }
+}
+
+
+/* Responsive homepage helpers */
+.chairman-grid {
+  gap: 80px;
+}
+
+@media (max-width: 900px) {
+  .chairman-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  .chairman-image-frame {
+    max-width: 100% !important;
+    aspect-ratio: auto !important;
+    min-height: 360px;
+  }
+
+  .global-presence-stats {
+    left: 16px !important;
+    right: 16px !important;
+    bottom: 16px !important;
+    padding: 18px !important;
+  }
+
+  .premium-card {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .chairman-image-frame {
+    min-height: 320px;
+  }
+}

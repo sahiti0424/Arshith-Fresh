@@ -17,7 +17,7 @@ function MagneticButton({ children, strength = 0.35 }) {
 
 const TRUST_ITEMS = [
   { icon: Award, label: 'Infrastructure Company of the Year, 2025' },
-  { icon: Shield, label: 'ISO 9001 & ISO 14001 Certified' }, 
+  { icon: Shield, label: 'ISO 9001 & ISO 14001 Certified' },
   { icon: Globe, label: 'Operations across 18 Countries' }
 ]
 
@@ -62,7 +62,7 @@ export default function Hero() {
         style={{
           position: 'relative',
           zIndex: 10,
-          padding: '0 40px',
+          padding: '0 24px',
           maxWidth: 1200,
           width: '100%',
           display: 'flex',
@@ -74,7 +74,7 @@ export default function Hero() {
         }}
       >
         <motion.section variants={staggerSlow} initial="hidden" animate="visible" style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          
+
           {/* Eyebrow */}
           <motion.div variants={fadeUp} style={{ display: 'inline-flex', alignItems: 'center', gap: 12, marginBottom: 32, padding: '8px 24px', borderRadius: 999, border: '1px solid var(--accent-border)', background: 'rgba(21,128,61,0.05)', backdropFilter: 'blur(10px)' }}>
             <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 0 10px var(--accent)' }} />
@@ -87,18 +87,18 @@ export default function Hero() {
           {/* Main Heading — Cinematic & Massive */}
           <motion.div variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } } }} style={{ marginBottom: 40, width: '100%' }}>
             <div style={{ overflow: 'hidden', lineHeight: 1.1 }}>
-              <motion.h1 
+              <motion.h1
                 variants={{ hidden: { y: '100%', opacity: 0 }, visible: { y: '0%', opacity: 1, transition: { duration: 1, ease: [0.22, 1, 0.36, 1] } } }}
-                className="text-display" 
+                className="text-display"
                 style={{ fontSize: 'clamp(50px, 8vw, 130px)', color: 'var(--text-primary)', margin: 0 }}
               >
                 Building a <span className="text-syne text-gold-gradient" style={{ fontStyle: 'normal', fontWeight: 700 }}>Sustainable</span>
               </motion.h1>
             </div>
             <div style={{ overflow: 'hidden', lineHeight: 1.1 }}>
-              <motion.h1 
+              <motion.h1
                 variants={{ hidden: { y: '100%', opacity: 0 }, visible: { y: '0%', opacity: 1, transition: { duration: 1, ease: [0.22, 1, 0.36, 1] } } }}
-                className="text-display" 
+                className="text-display"
                 style={{ fontSize: 'clamp(50px, 8vw, 130px)', color: 'var(--text-primary)', margin: 0 }}
               >
                 Future Today

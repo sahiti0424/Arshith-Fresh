@@ -11,7 +11,7 @@ import {
 export default function Chairman() {
   const sectionRef = useRef(null)
   const { ref, inView } = useInView({ threshold: 0.12, triggerOnce: true, rootMargin: '0px 0px -60px 0px' })
-    // Section-level parallax
+  // Section-level parallax
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start'],
@@ -26,16 +26,17 @@ export default function Chairman() {
   return (
     <section
       ref={sectionRef}
-      style={{ background: 'var(--bg)', padding: '60px 60px 60px', overflow: 'hidden' }}
+      style={{ background: 'var(--bg)', padding: '60px 24px', overflow: 'hidden' }}
     >
       <motion.div
         ref={ref}
         variants={staggerSlow}
         initial="hidden"
         animate={inView ? 'visible' : 'hidden'}
+        className="chairman-grid"
         style={{
           display: 'grid',
-          gridTemplateColumns: '400px 1fr',
+          gridTemplateColumns: 'minmax(0, 400px) 1fr',
           gap: 80,
           maxWidth: 1300,
           margin: '0 auto',
@@ -62,9 +63,11 @@ export default function Chairman() {
 
           {/* Image frame */}
           <motion.div
+            className="chairman-image-frame"
             style={{
-              width: 400,
-              height: 500,
+              width: '100%',
+              maxWidth: 400,
+              aspectRatio: '4 / 5',
               background: 'linear-gradient(160deg, #F1F5F9 0%, var(--text-primary) 100%)',
               borderRadius: 4,
               overflow: 'hidden',
@@ -244,8 +247,8 @@ export default function Chairman() {
           {/* Read more link */}
           <motion.div variants={fadeUp}>
             <motion.button
-              
-              
+
+
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',

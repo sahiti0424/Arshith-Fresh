@@ -712,7 +712,7 @@ function PaymentModal({ tier, onClose }) {
           >
             <X size={18} />
           </button>
-          
+
           <div style={{ textAlign: 'center', marginBottom: 32 }}>
             <div style={{
               width: 64, height: 64, borderRadius: 16,
@@ -758,7 +758,7 @@ function PaymentModal({ tier, onClose }) {
               </div>
             </div>
           </div>
-          
+
           <button style={{
             width: '100%', padding: '16px', borderRadius: 12,
             background: tier.color, color: '#fff', border: 'none',

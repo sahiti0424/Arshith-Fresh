@@ -47,7 +47,7 @@ export default function Careers() {
           >
             Join <span style={{ color: 'var(--gold)', fontStyle: 'italic' }}>Our Team</span>
           </motion.h1>
-          
+
           <motion.div variants={fadeUp} style={{ width: 60, height: 2, background: 'var(--gold)', margin: '0 auto 40px' }} />
 
           <motion.p
@@ -65,7 +65,7 @@ export default function Careers() {
             We are constantly looking for visionary thinkers and driven professionals who want to make a tangible impact on India's growth story.
           </motion.p>
         </div>
-        
+
         <motion.div
           variants={fadeUp}
           style={{

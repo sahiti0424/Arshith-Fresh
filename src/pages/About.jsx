@@ -47,7 +47,7 @@ export default function About() {
           >
             About <span style={{ color: 'var(--gold)', fontStyle: 'italic' }}>Arshith Group</span>
           </motion.h1>
-          
+
           <motion.div variants={fadeUp} style={{ width: 60, height: 2, background: 'var(--gold)', margin: '0 auto 40px' }} />
 
           <motion.p
@@ -80,7 +80,7 @@ export default function About() {
             Our work spans infrastructure, energy, logistics, and real estate, where we combine local insight with global standards to deliver lasting impact, sustainable outcomes, and meaningful value for communities.
           </motion.p>
         </div>
-        
+
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: 32 }}>
           <motion.div
             variants={fadeUp}

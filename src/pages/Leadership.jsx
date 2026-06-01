@@ -47,7 +47,7 @@ export default function Leadership() {
           >
             Our <span style={{ color: 'var(--gold)', fontStyle: 'italic' }}>Leadership</span>
           </motion.h1>
-          
+
           <motion.div variants={fadeUp} style={{ width: 60, height: 2, background: 'var(--gold)', margin: '0 auto 60px' }} />
         </div>
 

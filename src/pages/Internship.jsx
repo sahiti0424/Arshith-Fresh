@@ -486,8 +486,8 @@ export default function Internship() {
         paddingBottom: 100,
         minHeight: '100vh',
         background: 'var(--bg)',
-        paddingLeft: 40,
-        paddingRight: 40,
+        paddingLeft: 'clamp(16px, 5vw, 40px)',
+        paddingRight: 'clamp(16px, 5vw, 40px)',
         position: 'relative',
         overflow: 'hidden'
       }}
@@ -771,9 +771,10 @@ export default function Internship() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
+          className="internship-cards-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(280px, 100%, 450px), 1fr))',
             gap: 32
           }}
         >

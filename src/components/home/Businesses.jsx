@@ -132,7 +132,7 @@ function BusinessCard({ company, index, onClick }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         position: 'relative',
-        height: 480,
+        minHeight: 420,
         borderRadius: 20,
         overflow: 'hidden',
         cursor: 'pointer',
@@ -161,7 +161,7 @@ function BusinessCard({ company, index, onClick }) {
         />
         {/* Subtle warm overlay on image */}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(255,255,255,0.2), transparent)' }} />
-        
+
         {/* Floating Icon */}
         <div style={{
           position: 'absolute', top: 20, right: 20,
@@ -243,7 +243,7 @@ function Modal({ company, onClose }) {
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         onClick={(e) => e.stopPropagation()}
         style={{
-          width: '100%', maxWidth: 1000, background: 'var(--surface)', borderRadius: 24, overflow: 'hidden', display: 'flex', flexDirection: 'column', maxHeight: '90vh', boxShadow: '0 24px 60px rgba(0,0,0,0.8)', position: 'relative', border: '1px solid var(--border)'
+          width: 'clamp(320px, 95vw, 1000px)', maxWidth: 1000, background: 'var(--surface)', borderRadius: 24, overflow: 'hidden', display: 'flex', flexDirection: 'column', maxHeight: '90vh', boxShadow: '0 24px 60px rgba(0,0,0,0.8)', position: 'relative', border: '1px solid var(--border)'
         }}
       >
         {/* Header Image Area */}
@@ -261,8 +261,8 @@ function Modal({ company, onClose }) {
         </div>
 
         {/* Content Area */}
-        <div style={{ padding: '0 48px 48px', overflowY: 'auto' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 20, marginTop: -32, position: 'relative', zIndex: 10 }}>
+          <div style={{ padding: '0 24px 48px', overflowY: 'auto' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 20, marginTop: -32, position: 'relative', zIndex: 10, flexWrap: 'wrap', justifyContent: 'center' }}>
             <div style={{ width: 80, height: 80, borderRadius: 20, background: 'rgba(212,175,55,0.1)', border: '1px solid var(--accent-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 12px 32px rgba(0,0,0,0.5)` }}>
               <company.icon size={40} color="var(--accent)" />
             </div>
@@ -292,7 +292,7 @@ function Modal({ company, onClose }) {
                 </p>
               </div>
             </div>
-            
+
             {/* Right Column */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 40 }}>
               <div>
@@ -325,7 +325,7 @@ function Modal({ company, onClose }) {
               </div>
             </div>
           </div>
-          
+
           <div style={{ marginTop: 56, display: 'flex', justifyContent: 'flex-end', borderTop: '1px solid var(--border)', paddingTop: 32 }}>
             <button style={{ display: 'inline-flex', alignItems: 'center', gap: 12, padding: '16px 32px', background: 'var(--accent)', color: 'var(--bg)', border: 'none', borderRadius: 4, fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', cursor: 'pointer', transition: 'all 0.2s' }} onMouseEnter={(e) => { e.target.style.background = 'var(--text-primary)'; e.target.style.color = 'var(--bg)'; }} onMouseLeave={(e) => { e.target.style.background = 'var(--accent)'; e.target.style.color = 'var(--bg)'; }}>
               Partner with {company.name}
@@ -352,18 +352,18 @@ export default function Businesses() {
       {/* Header */}
       <motion.div
         ref={ref}
-        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 60px', marginBottom: 80, textAlign: 'center', position: 'relative', zIndex: 1 }}
+        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 24px', marginBottom: 80, textAlign: 'center', position: 'relative', zIndex: 1 }}
         variants={staggerSlow}
         initial="hidden"
         animate={inView ? 'visible' : 'hidden'}
       >
-        <motion.div variants={fadeUp} style={{ 
-          display: 'inline-flex', 
-          alignItems: 'center', 
+        <motion.div variants={fadeUp} style={{
+          display: 'inline-flex',
+          alignItems: 'center',
           gap: 8,
           background: 'rgba(212,175,55,0.05)',
           border: '1px solid var(--accent-border)',
-          borderRadius: 20, 
+          borderRadius: 20,
           padding: '6px 16px',
           marginBottom: 16,
         }}>
@@ -377,14 +377,14 @@ export default function Businesses() {
           <motion.h2
             className="text-display"
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08 } } }}
-            style={{ 
-              fontSize: 'clamp(40px, 5vw, 72px)', 
-              color: 'var(--text-primary)', 
-              lineHeight: 1.1, 
-              display: 'flex', 
-              flexWrap: 'wrap', 
-              justifyContent: 'center', 
-              gap: '0 12px', 
+            style={{
+              fontSize: 'clamp(40px, 5vw, 72px)',
+              color: 'var(--text-primary)',
+              lineHeight: 1.1,
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              gap: '0 12px',
               marginBottom: 14
             }}>
             {['Group', 'of', 'Companies'].map((word, i) => (
@@ -395,13 +395,13 @@ export default function Businesses() {
           </motion.h2>
         </div>
 
-        <motion.p variants={fadeUp} style={{ 
-          fontFamily: "'Roboto', sans-serif", 
-          fontSize: 18, 
+        <motion.p variants={fadeUp} style={{
+          fontFamily: "'Roboto', sans-serif",
+          fontSize: 18,
           fontWeight: 300,
-          color: 'var(--text-secondary)', 
-          maxWidth: 700, 
-          lineHeight: 1.7 
+          color: 'var(--text-secondary)',
+          maxWidth: 700,
+          lineHeight: 1.7
         }}>
           Each vertical is a self-sustaining engine of growth, interconnected by shared values of precision, innovation, and long-term nation-building.
         </motion.p>
@@ -414,6 +414,7 @@ export default function Businesses() {
         whileInView="visible"
         viewport={{ once: true, margin: '0px 0px -80px 0px' }}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-6 lg:px-12 max-w-[1800px] mx-auto"
+        style={{ width: '100%' }}
       >
         {COMPANIES.map((company, i) => (
           <BusinessCard key={company.id} company={company} index={i} onClick={() => setSelectedCompany(company)} />

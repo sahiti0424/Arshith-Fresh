@@ -33,7 +33,7 @@ export default function FutureWorks() {
   const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true })
 
   return (
-    <section style={{ background: 'var(--surface2)', padding: '100px 60px', position: 'relative' }}>
+    <section style={{ background: 'var(--surface2)', padding: '100px 24px', position: 'relative' }}>
       <motion.div
         ref={ref}
         variants={staggerSlow}

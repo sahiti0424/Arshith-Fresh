@@ -101,7 +101,7 @@ export default function FutureWorksDetail() {
                 {project.description}
               </p>
             </div>
-            
+
             <div style={{ background: 'var(--surface)', padding: 32, borderRadius: 16, border: '1px solid var(--border)' }}>
               <h2 style={{ fontFamily: "'Inter', sans-serif", fontSize: 20, color: 'var(--text-primary)', marginBottom: 24, fontWeight: 700 }}>Key Objectives</h2>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>

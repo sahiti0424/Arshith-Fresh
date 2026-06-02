@@ -226,3 +226,18 @@ body {
     min-height: 320px;
   }
 }
+
+/* ── Global Presence mobile ──────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* Ensure map markers don't clip on narrow screens */
+  .global-presence-stats {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    left: 12px !important;
+    right: 12px !important;
+    bottom: 12px !important;
+  }
+}
+

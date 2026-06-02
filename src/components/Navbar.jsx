@@ -297,6 +297,157 @@ function NavItem({ item }) {
   )
 }
 
+/* ─── MOBILE DRAWER NAV ITEMS ────────────────────────────────────────────────── */
+function MobileNavItems({ setMenuOpen }) {
+  const location = useLocation()
+  const [openItems, setOpenItems] = useState({})
+
+  const toggle = (label) =>
+    setOpenItems((prev) => ({ ...prev, [label]: !prev[label] }))
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginBottom: 32 }}>
+      {NAV_ITEMS.map((item) => {
+        const hasDropdown = !!item.dropdown
+        const hasSimple = !!item.simpleLinks
+        const hasAny = hasDropdown || hasSimple
+        const isExpanded = !!openItems[item.label]
+
+        return (
+          <div key={item.label}>
+            {/* Row */}
+            <div
+              onClick={hasAny ? () => toggle(item.label) : undefined}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '10px 0',
+                borderBottom: isExpanded ? 'none' : '1px solid var(--border)',
+                cursor: hasAny ? 'pointer' : 'default',
+              }}
+            >
+              {item.path ? (
+                <Link
+                  to={item.path}
+                  onClick={() => setMenuOpen(false)}
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: 22, fontWeight: 700,
+                    color: location.pathname === item.path ? 'var(--accent)' : 'var(--text-primary)',
+                    textDecoration: 'none',
+                    letterSpacing: '-0.01em',
+                    flex: 1,
+                  }}
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <span style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 22, fontWeight: 700,
+                  color: 'var(--text-primary)',
+                  letterSpacing: '-0.01em',
+                  flex: 1,
+                }}>
+                  {item.label}
+                </span>
+              )}
+              {hasAny && (
+                <motion.div
+                  animate={{ rotate: isExpanded ? 180 : 0 }}
+                  transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ flexShrink: 0, marginLeft: 8 }}
+                >
+                  <ChevronDown size={18} color="var(--text-tertiary)" strokeWidth={2} />
+                </motion.div>
+              )}
+            </div>
+
+            {/* Expandable sub-items */}
+            <AnimatePresence initial={false}>
+              {hasAny && isExpanded && (
+                <motion.div
+                  key="mobile-sub"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ overflow: 'hidden', borderBottom: '1px solid var(--border)' }}
+                >
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 2, paddingLeft: 12, paddingBottom: 10, paddingTop: 4 }}>
+                    {hasSimple && item.simpleLinks.map((link) => (
+                      <Link
+                        key={link.path}
+                        to={link.path}
+                        onClick={() => setMenuOpen(false)}
+                        style={{ textDecoration: 'none', display: 'block' }}
+                      >
+                        <motion.div
+                          whileHover={{ backgroundColor: 'var(--bg-warm)' }}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            padding: '9px 12px',
+                            borderRadius: 8,
+                          }}
+                        >
+                          <div>
+                            <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: 14, fontWeight: 600, color: link.color }}>
+                              {link.label}
+                            </div>
+                            <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: 11, color: 'var(--text-tertiary)', marginTop: 1 }}>
+                              {link.desc}
+                            </div>
+                          </div>
+                          <ArrowRight size={13} color={link.color} strokeWidth={2.5} />
+                        </motion.div>
+                      </Link>
+                    ))}
+                    {hasDropdown && item.dropdown.cols.map((col) => {
+                      const Icon = col.icon
+                      return (
+                        <div key={col.heading} style={{ marginBottom: 6 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 12px', marginTop: 4 }}>
+                            <div style={{
+                              width: 22, height: 22, borderRadius: 5,
+                              background: `${col.color}20`,
+                              display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                            }}>
+                              <Icon size={12} color={col.color} strokeWidth={2} />
+                            </div>
+                            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: col.color }}>
+                              {col.heading}
+                            </span>
+                          </div>
+                          {col.items.map((sub) => (
+                            <div
+                              key={sub.label}
+                              style={{
+                                fontFamily: "'Roboto', sans-serif",
+                                fontSize: 13, color: 'var(--text-secondary)',
+                                padding: '5px 12px',
+                                borderRadius: 6,
+                              }}
+                            >
+                              — {sub.label}
+                            </div>
+                          ))}
+                        </div>
+                      )
+                    })}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 /* ─── MAGNETIC CTA ───────────────────────────────────────────────────────────── */
 function MagneticButton({ children, strength = 0.35 }) {
   const ref = useRef(null)
@@ -450,67 +601,7 @@ export default function Navbar() {
                 </motion.button>
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginBottom: 32 }}>
-                {NAV_ITEMS.map((item) => (
-                  <div key={item.label}>
-                    {item.path ? (
-                      <Link
-                        to={item.path}
-                        onClick={() => setMenuOpen(false)}
-                        style={{
-                          display: 'block',
-                          fontFamily: "'Inter', sans-serif",
-                          fontSize: 22, fontWeight: 700,
-                          color: location.pathname === item.path ? 'var(--accent)' : 'var(--text-primary)',
-                          textDecoration: 'none',
-                          padding: '10px 0',
-                          borderBottom: '1px solid var(--border)',
-                          letterSpacing: '-0.01em',
-                        }}
-                      >
-                        {item.label}
-                      </Link>
-                    ) : (
-                      <div style={{ padding: '10px 0', borderBottom: '1px solid var(--border)' }}>
-                        <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 22, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 8 }}>
-                          {item.label}
-                        </div>
-                        {item.simpleLinks && (
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: 2, paddingLeft: 12, marginBottom: 8 }}>
-                            {item.simpleLinks.map((link) => (
-                              <Link
-                                key={link.path}
-                                to={link.path}
-                                onClick={() => setMenuOpen(false)}
-                                style={{
-                                  fontFamily: "'Roboto', sans-serif",
-                                  fontSize: 14,
-                                  color: 'var(--text-secondary)',
-                                  padding: '6px 0',
-                                  textDecoration: 'none',
-                                }}
-                              >
-                                — {link.label}
-                              </Link>
-                            ))}
-                          </div>
-                        )}
-                        {item.dropdown && (
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: 2, paddingLeft: 12 }}>
-                            {item.dropdown.cols.flatMap((col) =>
-                              col.items.map((sub) => (
-                                <div key={sub.label} style={{ fontFamily: "'Roboto', sans-serif", fontSize: 13, color: 'var(--text-secondary)', padding: '3px 0' }}>
-                                  — {sub.label}
-                                </div>
-                              ))
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+              <MobileNavItems setMenuOpen={setMenuOpen} />
 
               <Link to="/contact" style={{ textDecoration: 'none' }} onClick={() => setMenuOpen(false)}>
                 <motion.button

@@ -22,20 +22,22 @@ function StatItem({ prefix, value, suffix, decimals, label, separator, inView })
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: 8,
+        gap: 6,
         flex: 1,
-        padding: '0 12px',
+        padding: '0 10px',
+        minWidth: 0,
       }}
       whileHover={{ scale: 1.06 }}
       transition={{ type: 'spring', stiffness: 400, damping: 22 }}
     >
       <div style={{
         fontFamily: "'Lora', serif",
-        fontSize: 'clamp(20px, 2.2vw, 32px)',
+        fontSize: 'clamp(18px, 2.5vw, 32px)',
         fontWeight: 800,
         color: 'var(--text-primary)',
         lineHeight: 1,
         letterSpacing: '-0.02em',
+        whiteSpace: 'nowrap',
       }}>
         {prefix}
         {inView ? (
@@ -45,13 +47,15 @@ function StatItem({ prefix, value, suffix, decimals, label, separator, inView })
       </div>
       <div style={{
         fontFamily: "'Source Sans Pro', sans-serif",
-        fontSize: 10,
+        fontSize: 'clamp(9px, 1.2vw, 10px)',
         letterSpacing: '1px',
         textTransform: 'uppercase',
         color: 'var(--text-secondary)',
         textAlign: 'center',
         lineHeight: 1.4,
         fontWeight: 500,
+        whiteSpace: 'normal',
+        wordBreak: 'break-word',
       }}>
         {label}
       </div>
@@ -232,11 +236,54 @@ export default function StatsBar() {
   return (
     <>
       {/* ── Compact Stats Bar ── */}
+      <style>{`
+        .stats-bar-grid {
+          display: flex;
+          align-items: center;
+          gap: 0;
+        }
+        .stats-bar-divider {
+          display: flex;
+        }
+        @media (max-width: 640px) {
+          .stats-bar-grid {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            padding: 16px 16px !important;
+          }
+          .stats-bar-divider {
+            display: none !important;
+          }
+          .stats-bar-item {
+            padding: 12px 4px !important;
+            border-bottom: 1px solid rgba(21,128,61,0.1);
+          }
+          .stats-bar-item:nth-child(4),
+          .stats-bar-item:nth-child(5),
+          .stats-bar-item:nth-child(6) {
+            border-bottom: none;
+          }
+        }
+        @media (max-width: 400px) {
+          .stats-bar-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+          .stats-bar-item:nth-child(5),
+          .stats-bar-item:nth-child(6) {
+            border-bottom: none;
+          }
+          .stats-bar-item:nth-child(4) {
+            border-bottom: 1px solid rgba(21,128,61,0.1);
+          }
+        }
+      `}</style>
       <motion.div
         ref={ref}
         initial={{ y: 50, opacity: 0 }}
         animate={inView ? { y: 0, opacity: 1 } : {}}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        className="stats-bar-grid"
         style={{
           position: 'relative',
           marginTop: -80,
@@ -247,13 +294,9 @@ export default function StatsBar() {
           border: '1px solid rgba(21, 128, 61, 0.15)',
           borderRadius: 24,
           padding: '20px 30px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: 0,
           boxShadow: '0 25px 50px rgba(21, 128, 61, 0.1)',
           maxWidth: 1200,
-          margin: '-80px auto 80px', // Pulled up over the hero
-          overflow: 'hidden'
+          margin: '-80px auto 80px',
         }}
       >
         {/* Subtle glow behind stats */}
@@ -261,19 +304,21 @@ export default function StatsBar() {
           position: 'absolute', inset: 0,
           background: 'radial-gradient(ellipse at top, rgba(21, 128, 61, 0.12) 0%, transparent 70%)',
           pointerEvents: 'none',
+          borderRadius: 24,
         }} />
 
         {STATS.map((stat, i) => (
-          <div key={stat.label} style={{ display: 'flex', flex: 1, alignItems: 'center', position: 'relative', zIndex: 1 }}>
+          <div key={stat.label} className="stats-bar-item" style={{ display: 'flex', flex: 1, alignItems: 'center', position: 'relative', zIndex: 1, minWidth: 0 }}>
             <StatItem {...stat} inView={inView} />
             {i < STATS.length - 1 && (
               <motion.div
+                className="stats-bar-divider"
                 initial={{ scaleY: 0 }}
                 animate={inView ? { scaleY: 1 } : {}}
                 transition={{ duration: 0.7, delay: i * 0.08 + 0.2 }}
                 style={{
                   width: 1, height: 48,
-                  background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent)',
+                  background: 'linear-gradient(to bottom, transparent, rgba(21,128,61,0.15), transparent)',
                   flexShrink: 0,
                   marginLeft: 'auto',
                   transformOrigin: 'top',
